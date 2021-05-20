@@ -12,7 +12,7 @@ public class SpellingBeeSkillStreamHandler extends SkillStreamHandler {
     private static Skill getSkill() {
         return Skills.standard()
                 .addRequestHandlers(
-                        new StopAndCancelIntentHandler(),
+                        new CancelAndStopIntentHandler(),
                         new HelpIntentHandler(),
                         new LaunchRequestHandler(),
                         new SessionEndedRequestHandler())

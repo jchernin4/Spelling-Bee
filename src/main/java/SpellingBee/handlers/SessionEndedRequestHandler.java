@@ -9,7 +9,6 @@ import com.amazon.ask.request.Predicates;
 import java.util.Optional;
 
 public class SessionEndedRequestHandler implements RequestHandler {
-
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
         return handlerInput.matches(Predicates.requestType(SessionEndedRequest.class));
