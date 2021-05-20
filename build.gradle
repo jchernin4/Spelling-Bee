@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    
+    implementation group: 'com.amazon.alexa', name: 'ask-sdk', version: '2.38.1'
 }
 
 test {
