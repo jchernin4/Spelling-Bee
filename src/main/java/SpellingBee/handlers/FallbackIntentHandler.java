@@ -5,6 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.request.Predicates;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class FallbackIntentHandler implements RequestHandler {
@@ -15,11 +16,20 @@ public class FallbackIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
-        String speechText = "Sorry, I don't know that. You can say try saying help!";
+        
+        Map<String, Object> sessionAttributes = handlerInput.getAttributesManager().getSessionAttributes();
+        if (sessionAttributes.get("gameState") != null && sessionAttributes.get("gameState").equals("STARTED")) {
+            // currently playing
+            return handlerInput.getResponseBuilder()
+                    .withSpeech("I'm sorry, that didn't seem to be a valid response.")
+                    .withReprompt("Please say a valid letter.")
+                    .build();
+        }
+
+        // not playing
         return handlerInput.getResponseBuilder()
-                .withSpeech(speechText)
-                .withSimpleCard("HelloWorld", speechText)
-                .withReprompt(speechText)
+                .withSpeech("You are not currently in a game. Would you like to start one?")
+                .withReprompt("Say yes to start the game, or say no to quit.")
                 .build();
     }
 }

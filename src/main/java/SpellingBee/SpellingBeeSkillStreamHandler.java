@@ -14,10 +14,16 @@ public class SpellingBeeSkillStreamHandler extends SkillStreamHandler {
         return Skills.standard()
                 .addRequestHandlers(
                         new CancelAndStopIntentHandler(),
-                        new HelpIntentHandler(),
                         new FallbackIntentHandler(),
+                        new HelpIntentHandler(),
                         new LaunchRequestHandler(),
-                        new SessionEndedRequestHandler())
+                        new LetterGuessIntentHandler(),
+                        new NoIntentHandler(),
+                        new SessionEndedRequestHandler(),
+                        new UnsupportedRequestHandler(),
+                        new YesIntentHandler())
+                .withTableName("SpellingBee")
+                .withAutoCreateTable(true)
                 .withSkillId("amzn1.ask.skill.73c01e4a-fbe8-4a04-b17d-e329f1b01726")
                 .build();
     }
