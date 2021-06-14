@@ -34,7 +34,7 @@ public class YesIntentHandler implements RequestHandler {
         handlerInput.getAttributesManager().setSessionAttributes(sessionAttributes);
 
         return handlerInput.getResponseBuilder()
-                .withSpeech("Great! Try saying a letter to start the game.")
+                .withSpeech("Great! Your word is " + randomWord + ". Try saying a letter to start the game.")
                 .withReprompt("Try saying a letter")
                 .build();
     }

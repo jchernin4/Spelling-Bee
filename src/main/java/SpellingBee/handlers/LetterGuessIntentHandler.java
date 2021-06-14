@@ -26,7 +26,7 @@ public class LetterGuessIntentHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
         IntentRequest intentRequest = (IntentRequest) handlerInput.getRequestEnvelope().getRequest();
-        String guessLetter = intentRequest.getIntent().getSlots().get("letter").getValue();
+        String guessLetter = intentRequest.getIntent().getSlots().get("letter").getValue().split("")[0];
         Map<String, Object> sessionAttributes = handlerInput.getAttributesManager().getSessionAttributes();
         int targetIndex = (int) sessionAttributes.get("guessIndex");
         String targetWord = (String) sessionAttributes.get("guessWord");
@@ -37,15 +37,25 @@ public class LetterGuessIntentHandler implements RequestHandler {
             handlerInput.getAttributesManager().setSessionAttributes(sessionAttributes);
             
             return handlerInput.getResponseBuilder()
-                    .withSpeech(guessLetter + " was incorrect!")
+                    .withSpeech(guessLetter + " was incorrect! The correct letter was " + targetLetter + ". Thanks for playing!")
                     .build();
             
         } else if (guessLetter.equalsIgnoreCase(targetLetter)) {
             int guessIndex = (int) sessionAttributes.get("guessIndex") + 1;
+            
+            if (guessIndex >= targetWord.length()) {
+                sessionAttributes.put("gameState", "ENDED");
+                handlerInput.getAttributesManager().setSessionAttributes(sessionAttributes);
+                return handlerInput.getResponseBuilder()
+                        .withSpeech("Finished! You spelled the word correctly! Thanks for playing!")
+                        .build();
+            }
+            
             sessionAttributes.put("guessIndex", guessIndex);
             handlerInput.getAttributesManager().setSessionAttributes(sessionAttributes);
             
             return handlerInput.getResponseBuilder()
+                    .withSpeech("Next letter?")
                     .withReprompt("Next letter?")
                     .build();
         }
