@@ -36,8 +36,14 @@ public class LetterGuessIntentHandler implements RequestHandler {
             sessionAttributes.put("gameState", "ENDED");
             handlerInput.getAttributesManager().setSessionAttributes(sessionAttributes);
             
+            StringBuilder response = new StringBuilder(guessLetter + " was incorrect! The correct letter was " + targetLetter + ". " + targetWord + " is spelled ");
+            for (String s : targetWord.split("")) {
+                response.append(s).append(". ");
+            }
+            response.append("Thanks for playing!");
+            
             return handlerInput.getResponseBuilder()
-                    .withSpeech(guessLetter + " was incorrect! The correct letter was " + targetLetter + ". Thanks for playing!")
+                    .withSpeech(response.toString())
                     .build();
             
         } else if (guessLetter.equalsIgnoreCase(targetLetter)) {
