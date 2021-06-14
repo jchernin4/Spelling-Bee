@@ -20,16 +20,14 @@ public class LaunchRequestHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
         AttributesManager attributesManager = handlerInput.getAttributesManager();
-        Map<String, Object> attributes = attributesManager.getPersistentAttributes();
+        Map<String, Object> attributes = attributesManager.getSessionAttributes();
         if (attributes.isEmpty()) {
-            attributes.put("endedSessionCount", 0);
-            attributes.put("gamesPlayed", 0);
             attributes.put("gameState", "ENDED");
         }
 
         attributesManager.setSessionAttributes(attributes);
 
-        String speechOutput = String.format("Welcome to Spelling Bee. You have played %s times. would you like to play?", attributes.get("gamesPlayed"));
+        String speechOutput = "Welcome to Spelling Bee. would you like to play?";
         String reprompt = "Say yes to start the game or no to quit.";
         return handlerInput.getResponseBuilder()
                 .withSpeech(speechOutput)

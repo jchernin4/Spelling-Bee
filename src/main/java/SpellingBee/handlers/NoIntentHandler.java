@@ -23,12 +23,6 @@ public class NoIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput handlerInput) {
-        Map<String, Object> sessionAttributes = handlerInput.getAttributesManager().getSessionAttributes();
-        int endedSessionCount = (int) sessionAttributes.get("endedSessionCount") + 1;
-        sessionAttributes.put("endedSessionCount", endedSessionCount);
-
-        handlerInput.getAttributesManager().setPersistentAttributes(sessionAttributes);
-        handlerInput.getAttributesManager().savePersistentAttributes();
         return handlerInput.getResponseBuilder()
                 .withSpeech("Ok, see you next time!")
                 .build();

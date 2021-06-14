@@ -33,11 +33,8 @@ public class LetterGuessIntentHandler implements RequestHandler {
         String targetLetter = targetWord.split("")[targetIndex];
         
         if (!guessLetter.equalsIgnoreCase(targetLetter)) {
-            int gamesPlayed = (int) sessionAttributes.get("gamesPlayed") + 1;
-            sessionAttributes.put("gamesPlayed", gamesPlayed);
             sessionAttributes.put("gameState", "ENDED");
-            handlerInput.getAttributesManager().setPersistentAttributes(sessionAttributes);
-            handlerInput.getAttributesManager().savePersistentAttributes();
+            handlerInput.getAttributesManager().setSessionAttributes(sessionAttributes);
             
             return handlerInput.getResponseBuilder()
                     .withSpeech(guessLetter + " was incorrect!")
