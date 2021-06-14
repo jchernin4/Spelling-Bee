@@ -10,7 +10,7 @@ import java.util.Optional;
 public class CancelAndStopIntentHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput handlerInput) {
-        return handlerInput.matches(Predicates.intentName("AMAZON.StopIntent").or(Predicates.intentName("AMAZON.CancelIntent")));
+        return handlerInput.matches(Predicates.intentName("AMAZON.StopIntent").or(Predicates.intentName("AMAZON.CancelIntent")).or(Predicates.intentName("AMAZON.NoIntent")));
     }
 
     @Override

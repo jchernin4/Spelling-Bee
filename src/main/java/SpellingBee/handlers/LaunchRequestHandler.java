@@ -21,7 +21,7 @@ public class LaunchRequestHandler implements RequestHandler {
         // Respond with basic greeting
         return handlerInput.getResponseBuilder()
                 .withSpeech(speechText)
-                //.withSimpleCard("HelloWorld", speechText)
+                .withSimpleCard("HelloWorld", speechText)
                 .withReprompt(speechText)
                 .build();
     }

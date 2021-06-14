@@ -1,0 +1,12 @@
+SpellingBee/handlers/HelpIntentHandler.java
+ SpellingBee.handlers.HelpIntentHandler
+SpellingBee/handlers/CancelAndStopIntentHandler.java
+ SpellingBee.handlers.CancelAndStopIntentHandler
+SpellingBee/handlers/FallbackIntentHandler.java
+ SpellingBee.handlers.FallbackIntentHandler
+SpellingBee/handlers/SessionEndedRequestHandler.java
+ SpellingBee.handlers.SessionEndedRequestHandler
+SpellingBee/handlers/SpellingBeeSkillStreamHandler.java
+ SpellingBee.handlers.SpellingBeeSkillStreamHandler
+SpellingBee/handlers/LaunchRequestHandler.java
+ SpellingBee.handlers.LaunchRequestHandler
